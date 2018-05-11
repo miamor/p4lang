@@ -285,3 +285,28 @@ control MyIngress ( inout headers hdr,
         ...
     }
 }
+```
+
+
+# Execute p4 program
+## Native way
+Dependencies: bmv2, p4c-bm
+1. Compile p4 program to .json file:
+`p4c-bmv2 --json <path to JSON file> <path to P4 file>`
+2. Setup veth `[sudo] ./veth_setup.sh`
+3. Using bmv2 backend to execute:
+`sudo ./simple_switch -i 0@<iface0> -i 1@<iface1> <path to JSON file>`
+
+## Using external libraries:
+Install p4c and compile using command:  
+```
+p4c-bm2-ss -o simple_router.json simple_router.p4
+```   
+or
+```
+p4c [-b bmv2-ss-p4org] simple_router.json simple_router.p4 (output is a folder)
+    ^ declare backend
+```
+
+
+## Using p4app to compile
