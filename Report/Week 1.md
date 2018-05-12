@@ -223,7 +223,8 @@ table ipv4_lpm  {
     default_action =  NoAction();
 }
 ```
-Đoạn code trên implement cho rules sau:
+Đoạn code trên implement cho rules sau:   
+
 | Key           | Action        | Action data                          |
 | ------------- | ------------- | ------------------------------------ |
 | 10.0.1.1/32   | Ipv4_forward  | dstAddr=00:00:00:00:01:01 <br>port=1 |
