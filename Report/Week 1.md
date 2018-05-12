@@ -310,3 +310,14 @@ p4c [-b bmv2-ss-p4org] simple_router.json simple_router.p4 (output is a folder)
 
 
 ## Using p4app to compile
+Install p4app and running: `p4app run examples/simple_router.p4app`   
+**p4app structure:**
+```
+  my_program.p4app
+    |
+    |- p4app.json
+    |
+    |- my_program.p4
+    |
+    |- ...other files...
+```
