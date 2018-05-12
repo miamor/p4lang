@@ -296,6 +296,7 @@ Dependencies: bmv2, p4c-bm
 2. Setup veth `[sudo] ./veth_setup.sh`
 3. Using bmv2 backend to execute:
 `sudo ./simple_switch -i 0@<iface0> -i 1@<iface1> <path to JSON file>`
+Change `simple_switch` to `simple_router` or something to change target.
 
 ## Using external libraries:
 Install p4c and compile using command:  
@@ -321,3 +322,6 @@ Install p4app and running: `p4app run examples/simple_router.p4app`
     |
     |- ...other files...
 ```
+
+# Next week
+Work on some examples https://github.com/p4lang/tutorials/tree/master/Teaching/Stanford_CS344_2018
