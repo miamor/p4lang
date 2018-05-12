@@ -228,7 +228,7 @@ table ipv4_lpm  {
 | ------------- | ------------- | ------------------------------------ |
 | 10.0.1.1/32   | Ipv4_forward  | dstAddr=00:00:00:00:01:01 <br>port=1 |
 | 10.0.1.2/32   | drop          |                                      |
-| *`            | NoAction      |                                      |
+| *             | NoAction      |                                      |
 
 ### Match kinds
 Một kiểu dữ liệu đặc biệt của p4, cho phép match các packet theo một cách nào đó   
