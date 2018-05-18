@@ -123,7 +123,7 @@ extern void hash<O, T, D, M>(out O result, in HashAlgorithm algo, in T base, in 
 
 Ở đây họ đã code sẵn một số chỗ, và họ để 1 số phần như là bài tập (TODO), có một số todo đơn giản thì em hiểu, em code được. Nhưng đọc cả project thì em cũng chưa hiểu lắm, cả workflow của nó rất khó hiểu ấy :< em chưa có thấy nó giống với prototype gì cả :~ Hay như lúc nó chia thành các registers hashtable_a với hashtable_b để làm gì?! Hay các kiểu match kind em vẫn chưa rõ hết, như ternary chẳng hạn?!  
 
-Chưa xong nhưng em cũng build lại bằng p4app, sau các proj khác chắc cũng thế, cho đồng bộ luôn.   
-`[sudo] p4app run simple_router_teaching.p4`  
+Chưa xong nhưng em cũng build lại bằng p4app ([Week 2](https://github.com/miamor/p4lang/tree/master/Report/Week2/simple_router_teaching.p4app)), sau các proj khác chắc cũng thế, cho đồng bộ luôn.   
+`[sudo] p4app run simple_router_teaching.p4app`  
 
-Nói chung là tuần này bị fail mất rồi~
+Nói chung là tuần này bị fail mất rồi~~ x_x
