@@ -1,4 +1,4 @@
-# Heavy hitter detection
+# Week 2: Heavy hitter detection
 
 ## 1. Overview
 "heavy hitter" flows là những flows với lượng traffic lớn, việc detect ra những flows kiểu này rất quan trọng trong 1 số trường hợp, ví dụ như phát hiện tấn công dos...   
@@ -40,7 +40,7 @@ Thuật toán này có lợi thế như sau: Giả sử counter thực tế củ
 2. Giá trị nhỏ nhất trong bảng val<sub>r</sub> là upper bound on the overestimation error (giá trị sai số lớn nhất giữa counter lưu trong bảng và counter thực tế) của 1 row bất kỳ. Tức là val<sub>j</sub> <= c<sub>j</sub> + val<sub>r</sub> 
 3. Bất kỳ flow nào với counter thực tế lớn hơn giá trị trung bình của counter trong toàn bảng (ví dụ c<sub>j</sub> > C/m) thì luôn luôn tồn tại trong bảng. (C là tổng counter của các packet trong bảng)
 
-### 3.2. Sampling for the mminimum value
+### 3.2. Sampling for the minimum value
 Trước hết thay đổi việc tìm giá trị nhỏ nhất trong cả bảng thay bằng tìm giá trị nhỏ nhất của một số d (d nhỏ, và đã biết) các counters được chọn ngẫu nhiên (algo 1.). Cách làm này sẽ giảm lượng memmory access per packet.   
 Và phiên bản modifiy là HashParallel (algo 2.). Cách làm này thay đổi lượng slots được đưa ra xem xét mỗi lần (khi look up hay update một key nào đó). Thay đổi chủ yếu so với Algo 1 là ở set of table slots được xem xét, ở đây sẽ là d slots tính được từ d hash functions độc lập nhau.  
 Cách này cho phép chúng ta xem xét và chọn ra (estimate) một giá trị minimum counter một cách tương đối mà phải xem xét ít rows hơn. Tuy nhiên, counter nhỏ nhất của d rows có thể khác xa counter nhỏ nhất của cả bảng.   
@@ -54,6 +54,12 @@ Giờ ta sẽ tìm cách giải quyết việc packet phải được xử lý n
 **Track a rolling minimum.** Ta đang track minimum counter khi packet qua pipeline bằng cách move counter và key qua pipeline theo dạng packet metadata.  
 Khi 1 packet qua pipeline, switch sẽ hash vào mỗi stage sử dụng carried key, thay vì hash dựa trên key corresponding to the incoming packet. Nếu key có trong bảng, hay slot còn trống, thì counter được cập nhật theo cách thông thường, và key không cần được carried theo trong packet nữa. Còn không thì key và counter ứng với counter lớn hơn sẽ được lưu lại vào trong table, cặp giá trị còn lại sẽ tiếp tục được carried kèm theo packet. Với p4, ta sử dụng match-action tables để implement việc so sánh 2 counter.  
 **Always insert in the first stage.** Nếu incoming key không có ở first stage, sẽ không có counter nào ứng với key đó được lưu để mà so sánh với counter được carried theo packet cả. Ở đây, ta sẽ thêm new flow vào first stage, và existing key và counter nếu bị loại bỏ sẽ được thêm vào packet metadata. Sau stage này, các packet có thể *track the rolling minimum* của subsequent stages theo cách thông thường.
+
+<div align="center">
+
+![Illustration of HashPipe](https://i.imgur.com/pB0UPJM.png)
+Illustration of HashPipe
+</div>
 
 ## 4. Prototype in p4
 Register arrays lưu flow identifiers (hashed thành các keys) và counter tương ứng.  
