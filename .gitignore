@@ -13,6 +13,5 @@ bmv2
 *.pdf
 *.zip
 *.txt
-*.p4
 *.docx
 Report/*.docx
